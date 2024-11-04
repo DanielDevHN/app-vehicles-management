@@ -1,12 +1,13 @@
 'use client';
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useCallback, useContext } from 'react';
 import { LayoutState, ChildContainerProps, LayoutConfig, LayoutContextProps } from '@/types';
+import { PrimeReactContext } from 'primereact/api';
+
 export const LayoutContext = createContext({} as LayoutContextProps);
 
 export const LayoutProvider = ({ children }: ChildContainerProps) => {
+    const { changeTheme } = useContext(PrimeReactContext);
     const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>({
-        ripple: false,
-        inputStyle: 'outlined',
         menuMode: 'static',
         colorScheme: 'light',
         theme: 'lara-light-indigo',
@@ -16,7 +17,6 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
     const [layoutState, setLayoutState] = useState<LayoutState>({
         staticMenuDesktopInactive: false,
         overlayMenuActive: false,
-        profileSidebarVisible: false,
         configSidebarVisible: false,
         staticMenuMobileActive: false,
         menuHoverActive: false
@@ -34,10 +34,6 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         }
     };
 
-    const showProfileSidebar = () => {
-        setLayoutState((prevLayoutState) => ({ ...prevLayoutState, profileSidebarVisible: !prevLayoutState.profileSidebarVisible }));
-    };
-
     const isOverlay = () => {
         return layoutConfig.menuMode === 'overlay';
     };
@@ -46,13 +42,26 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         return window.innerWidth > 991;
     };
 
+    const toggleTheme = useCallback(() => {
+        const newTheme = layoutConfig.colorScheme === 'light' ? 'viva-dark' : 'lara-light-indigo';
+        const newColorScheme = layoutConfig.colorScheme === 'light' ? 'dark' : 'light';
+
+        changeTheme?.(layoutConfig.theme, newTheme, 'theme-css', () => {
+            setLayoutConfig((prevConfig) => ({
+                ...prevConfig,
+                theme: newTheme,
+                colorScheme: newColorScheme,
+            }));
+        });
+    }, [layoutConfig, changeTheme]);
+
     const value: LayoutContextProps = {
         layoutConfig,
         setLayoutConfig,
         layoutState,
         setLayoutState,
         onMenuToggle,
-        showProfileSidebar
+        toggleTheme
     };
 
     return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;

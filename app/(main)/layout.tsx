@@ -15,11 +15,10 @@ export const metadata: Metadata = {
         title: 'Vehicle Management',
         url: 'https://github.com/DanielDevHN',
         description: '',
-        //images: ['https://www.primefaces.org/static/social/sakai-react.png'],
         ttl: 604800
     },
     icons: {
-        icon: '/favicon.ico'
+        icon: '/app/favicon.ico'
     }
 };
 

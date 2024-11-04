@@ -18,8 +18,8 @@ const AppMenu = () => {
         {
             label: 'Vehiculos',
             items: [
-                { label: 'Registrar Vehiculos', icon: 'pi pi-fw pi-car', to: '/pages/crud' },
-                { label: 'Ver Lista de Vehiculos', icon: 'pi pi-fw pi-check-square', to: '/uikit/input' }
+                { label: 'Registrar Vehiculos', icon: 'pi pi-fw pi-car', to: '/pages/vehicles' },
+                { label: 'Ver Lista de Vehiculos', icon: 'pi pi-fw pi-check-square', to: '/pages/list-vehicles' }
             ]
         },
         {
@@ -30,35 +30,15 @@ const AppMenu = () => {
                 {
                     label: 'Registrar Entrada / Salida',
                     icon: 'pi pi-fw pi-ticket',
-                    to: '/pages/crud'
+                    to: '/pages/entries-exits'
                 },
                 {
-                    label: 'Ver Registro Entradas / Salidas',
-                    icon: 'pi pi-fw pi-check-square',
-                    to: '/pages/crud'
+                    label: 'Filtros Entradas / Salidas',
+                    icon: 'pi pi-fw pi-filter',
+                    to: '/pages/list-entries-exits'
                 }
             ]
         },
-        {
-            label: 'Filtros',
-            items: [
-                {
-                    label: 'Documentation',
-                    icon: 'pi pi-fw pi-filter',
-                    to: '/documentation'
-                },
-                {
-                    label: 'Figma',
-                    to: '',
-                    icon: 'pi pi-fw pi-pencil'
-                },
-                {
-                    label: 'View Source',
-                    icon: 'pi pi-fw pi-search',
-                    to: ''
-                }
-            ]
-        }
     ];
 
     return (

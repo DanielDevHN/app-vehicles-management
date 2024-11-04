@@ -12,7 +12,7 @@ import Link from 'next/link';
 const Dashboard = () => {
     const [vehicles, setVehicles] = useState<any[]>([]);
     const [entriesExits, setEntriesExits] = useState<any[]>([]);
-    const [dateTime, setDateTime] = useState(new Date());
+    const [dateTime, setDateTime] = useState<Date | null>(null);
     const { layoutConfig } = useContext(LayoutContext);
 
     useEffect(() => {
@@ -21,6 +21,8 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
+        // Actualizar fecha y hora solo en el cliente
+        setDateTime(new Date());
         const timer = setInterval(() => setDateTime(new Date()), 1000);
         return () => clearInterval(timer);
     }, []);
@@ -31,7 +33,7 @@ const Dashboard = () => {
                 <div className="card">
                     <h5>Bienvenido (a)</h5>
                     <p>
-                        {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}
+                    <p>{dateTime && dateTime.toLocaleDateString()} {dateTime && dateTime.toLocaleTimeString()}</p>
                     </p>
                 </div>
             </div>

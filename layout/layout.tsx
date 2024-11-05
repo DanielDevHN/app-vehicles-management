@@ -8,7 +8,6 @@ import { classNames } from 'primereact/utils';
 import AppFooter from './AppFooter';
 import AppSidebar from './AppSidebar';
 import AppTopbar from './AppTopbar';
-import AppConfig from './AppConfig';
 import { LayoutContext } from './context/layoutcontext';
 import { PrimeReactContext } from 'primereact/api';
 import { ChildContainerProps, LayoutState, AppTopbarRef } from '@/types';
@@ -101,12 +100,6 @@ const Layout = ({ children }: ChildContainerProps) => {
         layoutState.staticMenuMobileActive && blockBodyScroll();
     }, [layoutState.overlayMenuActive, layoutState.staticMenuMobileActive]);
 
-    useEffect(() => {
-        if (layoutState.profileSidebarVisible) {
-            bindProfileMenuOutsideClickListener();
-        }
-    }, [layoutState.profileSidebarVisible]);
-
     useUnmountEffect(() => {
         unbindMenuOutsideClickListener();
         unbindProfileMenuOutsideClickListener();
@@ -117,9 +110,7 @@ const Layout = ({ children }: ChildContainerProps) => {
         'layout-static': layoutConfig.menuMode === 'static',
         'layout-static-inactive': layoutState.staticMenuDesktopInactive && layoutConfig.menuMode === 'static',
         'layout-overlay-active': layoutState.overlayMenuActive,
-        'layout-mobile-active': layoutState.staticMenuMobileActive,
-        'p-input-filled': layoutConfig.inputStyle === 'filled',
-        'p-ripple-disabled': !layoutConfig.ripple
+        'layout-mobile-active': layoutState.staticMenuMobileActive
     });
 
     return (
@@ -133,7 +124,6 @@ const Layout = ({ children }: ChildContainerProps) => {
                     <div className="layout-main">{children}</div>
                     <AppFooter />
                 </div>
-                <AppConfig />
                 <div className="layout-mask"></div>
             </div>
         </React.Fragment>

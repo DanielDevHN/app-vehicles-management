@@ -23,15 +23,14 @@ export interface BreadcrumbItem {
 export type LayoutState = {
     staticMenuDesktopInactive: boolean;
     overlayMenuActive: boolean;
-    profileSidebarVisible: boolean;
     configSidebarVisible: boolean;
     staticMenuMobileActive: boolean;
     menuHoverActive: boolean;
 };
 
 export type LayoutConfig = {
-    ripple: boolean;
-    inputStyle: string;
+    // ripple: boolean;
+    // inputStyle: string;
     menuMode: string;
     colorScheme: string;
     theme: string;
@@ -44,7 +43,7 @@ export interface LayoutContextProps {
     layoutState: LayoutState;
     setLayoutState: Dispatch<SetStateAction<LayoutState>>;
     onMenuToggle: () => void;
-    showProfileSidebar: () => void;
+    toggleTheme: () => void;
 }
 
 export interface MenuContextProps {
